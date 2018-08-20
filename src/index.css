@@ -1,5 +1,30 @@
+:root {
+  --text-color: white;
+  --app-background: #191b22;
+  --swimlane-header-background: #313543;
+  --swimlane-background: #292d37;
+  --swimlane-item-background: #444b5c;
+  --swimlane-item-text-color: white;
+  --border-radius: 2px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  font-size: 12px;
+  line-height: 1.5rem;
+  background: var(--app-background);
+  color: var(--text-color);
+}
+
+#root {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }

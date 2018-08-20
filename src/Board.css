@@ -1,0 +1,36 @@
+.Board {
+  flex: 1;
+  display: flex;
+  overflow-x: auto;
+}
+
+.Column {
+  flex: 1 0 250px;
+  background: var(--swimlane-background);
+  margin: 0 5px;
+  border-radius: var(--border-radius);
+}
+
+.Column:first-child {
+  margin-left: 0;
+}
+
+.Column:last-child {
+  margin-right: 0;
+}
+
+.Column__isOver {
+  background: var(--swimlane-item-background);
+}
+
+.Column--header {
+  text-align: center;
+  padding: 10px;
+  background: var(--swimlane-header-background);
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+}
+
+.Column--items {
+  padding: 10px;
+}
