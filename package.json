@@ -15,7 +15,8 @@
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject"
+    "eject": "react-scripts-ts eject",
+    "screenshot": "node capture.js"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.6",
@@ -26,6 +27,7 @@
     "@types/react-dnd-html5-backend": "^3.0.2",
     "@types/react-dom": "^16.0.7",
     "prettier": "^1.14.2",
+    "puppeteer": "^1.7.0",
     "typescript": "^3.0.1"
   }
 }
