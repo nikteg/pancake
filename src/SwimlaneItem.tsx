@@ -5,13 +5,14 @@ import "./SwimlaneItem.css"
 
 type Props = {
   text: string
+  index: number
   connectDragSource?: ConnectDragSource
   isDragging?: boolean
 }
 
-const itemSource: DragSourceSpec<Props, { text: string }> = {
+const itemSource: DragSourceSpec<Props, { text: string; index: number }> = {
   beginDrag(props) {
-    return { text: props.text }
+    return { text: props.text, index: props.index }
   },
 }
 

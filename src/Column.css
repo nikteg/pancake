@@ -1,0 +1,83 @@
+.Column {
+  flex: 1 0 250px;
+  background: var(--swimlane-background);
+  margin: 0 3px;
+  border-radius: var(--border-radius);
+}
+
+.Column:first-child {
+  margin-left: 0;
+}
+
+.Column:last-child {
+  margin-right: 0;
+}
+
+.Column__isOver {
+  background: var(--swimlane-item-background);
+}
+
+.Column--header {
+  padding: 6px;
+  background: var(--swimlane-header-background);
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+  display: flex;
+  align-items: center;
+  line-height: 1rem;
+}
+
+.Column--header--text {
+  margin-left: 3px;
+  flex: 1;
+}
+
+.Column--header--actions {
+}
+
+.Column--header--actions button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: white;
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.Column--header--actions button:hover {
+  opacity: 1;
+}
+
+.Column--add {
+  display: flex;
+  padding: 6px 6px 0;
+  justify-content: center;
+}
+
+.Column--add button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: white;
+  line-height: 1rem;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.Column--add button:hover {
+  opacity: 1;
+}
+
+.Column--add button span {
+  margin-left: 3px;
+}
+
+.Column--items {
+  padding: 6px;
+}

@@ -1,9 +1,11 @@
 .SwimlaneItem {
   background: var(--swimlane-item-background);
-  padding: 10px;
+  padding: 3px 6px;
   color: var(--swimlane-item-text-color);
   border-radius: var(--border-radius);
   cursor: move;
+  border-left: 4px solid #ffa000;
+  margin-bottom: 3px;
 }
 
 .SwimlaneItem__isDragging {
