@@ -35,20 +35,6 @@
 .Column--header--actions {
 }
 
-.Column--header--actions button {
-  background: transparent;
-  border: none;
-  padding: 0;
-  margin: 0;
-  color: white;
-  cursor: pointer;
-  opacity: 0.5;
-}
-
-.Column--header--actions button:hover {
-  opacity: 1;
-}
-
 .Column--add {
   display: flex;
   padding: 6px 6px 0;
@@ -57,25 +43,6 @@
 
 .Column--add button {
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border: none;
-  padding: 0;
-  margin: 0;
-  color: white;
-  line-height: 1rem;
-  opacity: 0.5;
-  cursor: pointer;
-}
-
-.Column--add button:hover {
-  opacity: 1;
-}
-
-.Column--add button span {
-  margin-left: 3px;
 }
 
 .Column--items {

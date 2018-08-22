@@ -2,10 +2,11 @@ import { SwimlaneItem } from "./SwimlaneItem"
 import { DropTarget } from "react-dnd"
 import classnames from "classnames"
 import { DropTargetCollector, DropTargetSpec, ConnectDropTarget } from "react-dnd"
-import { GoPlus, GoChevronDown } from "react-icons/go"
+import { IconButton, ActionButton } from "office-ui-fabric-react/lib/Button"
 import "./Column.css"
 
 import * as React from "react"
+import { DirectionalHint } from "office-ui-fabric-react/lib/Callout"
 
 export type Props = {
   name: string
@@ -37,7 +38,7 @@ export const collect: DropTargetCollector<{}> = (connect, monitor) => {
 @DropTarget("item", itemTarget, collect)
 export class Column extends React.Component<Props> {
   render() {
-    const { name, connectDropTarget, isOver, items, onMoveItem } = this.props
+    const { name, connectDropTarget, isOver, items } = this.props
     return (
       connectDropTarget &&
       connectDropTarget(
@@ -45,16 +46,30 @@ export class Column extends React.Component<Props> {
           <div className="Column--header">
             <div className="Column--header--text">{name}</div>
             <div className="Column--header--actions">
-              <button>
-                <GoChevronDown size="18px" />
-              </button>
+              <IconButton
+                styles={{ root: { color: "white" } }}
+                menuIconProps={{ iconName: "More" }}
+                menuProps={{
+                  directionalHint: DirectionalHint.bottomRightEdge,
+                  items: [
+                    {
+                      text: "Do thing",
+                      key: "thing",
+                      onClick: () => {},
+                    },
+                    {
+                      text: "Do another thing",
+                      key: "another",
+                    },
+                  ],
+                }}
+              />
             </div>
           </div>
           <div className="Column--add">
-            <button onClick={() => onMoveItem(items.concat(["New"]))}>
-              <GoPlus size="18px" />
-              <span>Add item</span>
-            </button>
+            <ActionButton styles={{ flexContainer: { justifyContent: "center" } }} iconProps={{ iconName: "Add" }}>
+              Add more items...
+            </ActionButton>
           </div>
           <div className="Column--items">
             {items.map((text, i) => (
