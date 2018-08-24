@@ -1,13 +1,20 @@
 .SwimlaneItem {
   background: var(--swimlane-item-background);
-  padding: 3px 6px;
+  padding: 3px 6px 3px 10px;
   color: var(--swimlane-item-text-color);
   border-radius: var(--border-radius);
   cursor: move;
-  border-left: 4px solid #ffa000;
+  border: 1px solid #eaeaea;
+  box-shadow: inset 4px 0 0 #0078d4;
   margin-bottom: 3px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .SwimlaneItem__isDragging {
   opacity: 0.25;
+}
+
+.SwimlaneItem--assigned {
+  display: flex;
 }

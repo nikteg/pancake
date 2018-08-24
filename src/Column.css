@@ -3,6 +3,8 @@
   background: var(--swimlane-background);
   margin: 0 3px;
   border-radius: var(--border-radius);
+  border: 1px solid #eaeaea;
+  border-top: 0;
 }
 
 .Column:first-child {
@@ -14,11 +16,12 @@
 }
 
 .Column__isOver {
-  background: var(--swimlane-item-background);
+  background: #eaeaea;
 }
 
 .Column--header {
   padding: 6px;
+  color: var(--swimlane-header-text-color);
   background: var(--swimlane-header-background);
   border-top-left-radius: var(--border-radius);
   border-top-right-radius: var(--border-radius);
@@ -33,16 +36,6 @@
 }
 
 .Column--header--actions {
-}
-
-.Column--add {
-  display: flex;
-  padding: 6px 6px 0;
-  justify-content: center;
-}
-
-.Column--add button {
-  width: 100%;
 }
 
 .Column--items {

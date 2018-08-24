@@ -1,11 +1,12 @@
 .Header {
-  background: var(--swimlane-header-background);
+  background: #fff;
   padding: 6px;
   border-radius: var(--border-radius);
   margin-bottom: 6px;
   display: flex;
   justify-content: center;
   align-items: center;
+  fill: #333;
 }
 
 .Header--text {

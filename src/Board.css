@@ -1,4 +1,9 @@
 .Board {
+  display: flex;
+  flex: 1;
+}
+
+.Board--columns {
   flex: 1;
   display: flex;
   overflow-x: auto;

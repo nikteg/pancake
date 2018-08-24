@@ -1,29 +1,41 @@
-import { SwimlaneItem } from "./SwimlaneItem"
-import { DropTarget } from "react-dnd"
 import classnames from "classnames"
-import { DropTargetCollector, DropTargetSpec, ConnectDropTarget } from "react-dnd"
-import { IconButton, ActionButton } from "office-ui-fabric-react/lib/Button"
-import "./Column.css"
-
-import * as React from "react"
+import { IconButton } from "office-ui-fabric-react/lib/Button"
 import { DirectionalHint } from "office-ui-fabric-react/lib/Callout"
+import * as React from "react"
+import { ConnectDropTarget, DropTarget, DropTargetCollector, DropTargetSpec } from "react-dnd"
+import { connect } from "react-redux"
+import { moveItem } from "./actions"
+import { Item } from "./api"
+import "./Column.css"
+import { RootState } from "./reducers"
+import { SwimlaneItem } from "./SwimlaneItem"
 
-export type Props = {
+type StateProps = {
   name: string
+  items: Item[]
+}
+
+type DispatchProps = {
+  moveItem: typeof moveItem
+}
+
+type OwnProps = {
+  id: number
+  onAddItem: (column: number) => void
   connectDropTarget?: ConnectDropTarget
   isOver?: boolean
   canDrop?: boolean
-  onMoveItem: Function
-  items: string[]
 }
+
+type Props = OwnProps & StateProps & DispatchProps
 
 export const itemTarget: DropTargetSpec<Props> = {
   canDrop(props) {
     return true
   },
   drop(props, monitor) {
-    const item = monitor.getItem()
-    props.onMoveItem([item.text])
+    const item = monitor.getItem() as Item
+    props.moveItem(item.id, item.swimlane, props.id)
   },
 }
 
@@ -36,9 +48,9 @@ export const collect: DropTargetCollector<{}> = (connect, monitor) => {
 }
 
 @DropTarget("item", itemTarget, collect)
-export class Column extends React.Component<Props> {
+class Column extends React.Component<Props> {
   render() {
-    const { name, connectDropTarget, isOver, items } = this.props
+    const { id, name, connectDropTarget, isOver, items, onAddItem } = this.props
     return (
       connectDropTarget &&
       connectDropTarget(
@@ -46,6 +58,11 @@ export class Column extends React.Component<Props> {
           <div className="Column--header">
             <div className="Column--header--text">{name}</div>
             <div className="Column--header--actions">
+              <IconButton
+                styles={{ root: { color: "white" } }}
+                iconProps={{ iconName: "CalculatorAddition" }}
+                onClick={() => onAddItem(id)}
+              />
               <IconButton
                 styles={{ root: { color: "white" } }}
                 menuIconProps={{ iconName: "More" }}
@@ -66,14 +83,9 @@ export class Column extends React.Component<Props> {
               />
             </div>
           </div>
-          <div className="Column--add">
-            <ActionButton styles={{ flexContainer: { justifyContent: "center" } }} iconProps={{ iconName: "Add" }}>
-              Add more items...
-            </ActionButton>
-          </div>
           <div className="Column--items">
-            {items.map((text, i) => (
-              <SwimlaneItem key={i} index={i} text={text} />
+            {items.map((item) => (
+              <SwimlaneItem key={item.id} item={item} />
             ))}
           </div>
         </div>,
@@ -81,3 +93,11 @@ export class Column extends React.Component<Props> {
     )
   }
 }
+
+export default connect<StateProps, DispatchProps, OwnProps>(
+  (state: RootState, ownProps: Props) => ({
+    items: state.swimlanes[ownProps.id].items.map((itemId) => state.items[itemId]),
+    name: state.swimlanes[ownProps.id].name,
+  }),
+  { moveItem },
+)(Column)
