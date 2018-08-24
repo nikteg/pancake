@@ -1,13 +1,14 @@
+import { initializeIcons } from "office-ui-fabric-react/lib/Icons"
+import { loadTheme } from "office-ui-fabric-react/lib/Styling"
 import * as React from "react"
 import * as ReactDOM from "react-dom"
+import { Provider } from "react-redux"
+import { createStore } from "redux"
 import Board from "./Board"
-import "./index.css"
-import registerServiceWorker from "./registerServiceWorker"
 import Header from "./Header"
-import { initializeIcons } from "office-ui-fabric-react/lib/Icons"
-
-import { IconContext } from "react-icons"
-import { loadTheme } from "office-ui-fabric-react/lib/Styling"
+import "./index.css"
+import reducers from "./reducers"
+import registerServiceWorker from "./registerServiceWorker"
 
 initializeIcons(/* optional base url */)
 
@@ -27,11 +28,17 @@ loadTheme({
   },
 })
 
+const store = createStore(reducers, window["__REDUX_DEVTOOLS_EXTENSION__"] && window["__REDUX_DEVTOOLS_EXTENSION__"]())
+
+console.log(store.getState())
+
 ReactDOM.render(
-  <IconContext.Provider value={{ style: { verticalAlign: "middle" } }}>
-    <Header />
-    <Board />
-  </IconContext.Provider>,
+  <Provider store={store}>
+    <>
+      <Header />
+      <Board />
+    </>
+  </Provider>,
   document.getElementById("root") as HTMLElement,
 )
 registerServiceWorker()

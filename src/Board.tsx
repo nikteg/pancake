@@ -1,35 +1,31 @@
 import * as React from "react"
-import "./Board.css"
 import { DragDropContext } from "react-dnd"
 import HTML5Backend from "react-dnd-html5-backend"
-import { Column } from "./Column"
+import { connect } from "react-redux"
+import { Swimlane } from "./api"
+import "./Board.css"
+import Column from "./Column"
+import { State } from "./reducers"
 
-const columns = ["Backlog", "In progress", "Needs review", "Done", "Extra"]
+type Props = {
+  columns: Swimlane[]
+}
 
 @DragDropContext(HTML5Backend)
-class Board extends React.Component {
-  state = {
-    items: { Backlog: ["Implement drag-n-drop"] },
-  }
-
-  moveItem = (from: string, fromIndex: number, to: string) => {
-    // const items = this.state.items[from]
-    // this.setState({ items: { [column]: items } })
-  }
-
-  columnItems = (column: string) => {
-    return this.state.items[column] ? this.state.items[column] : []
-  }
-
+class Board extends React.Component<Props> {
   public render() {
+    const { columns } = this.props
+
     return (
       <div className="Board">
         {columns.map((col) => (
-          <Column key={col} name={col} items={this.columnItems(col)} onMoveItem={this.moveItem} />
+          <Column id={col.id} key={col.id} />
         ))}
       </div>
     )
   }
 }
 
-export default Board
+export default connect((state: State) => ({
+  columns: Object.keys(state.swimlanes).map((key) => state.swimlanes[key]),
+}))(Board)
